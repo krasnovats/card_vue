@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order</title>
+
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    
+</head>
+<body>
+    <div id="app" class="app">
+       
+        <form v-on:submit="addProduct" class="form">
+        <!-- //v-model отправляем ТУДА, в data / реактивность в обратную сторону-->
+        <input v-model="title" type="text" placeholder="Название товара"> 
+        <input v-model="price" type="number" placeholder="Стоимость">
+        <input v-model="count" type="number" placeholder="Количество">
+        <button @click="addProduct" class="button">Добавить товар</button>
+       </form>
+
+        <ol>
+                <transition-group name="list">
+                    <li v-for="product in sortOrder" :key="product.id">
+                        {{ product.title }}
+                        <strong>стоимость:</strong>{{ product.price }},
+                        <strong>кол-во:</strong>{{ product.count }},
+                    </li>
+            </transition-group>
+        </ol>
+
+       <div v-if="totalPrice > 0">
+        Стоимость покупки: <strong>{{ totalPrice }}</strong>
+       </div>
+
+    </div>
+    <script src="/js/main.js"></script>
+</body>
+</html>
